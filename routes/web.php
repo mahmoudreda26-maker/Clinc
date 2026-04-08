@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ClientController::class, "home"])->name("home");
 Route::get('/doctor', [ClientController::class, "doctor"])->name("doctor");
 Route::get('/majors', [ClientController::class, "majors"])->name("majors");
-Route::get('doctor/bookappoument/{doctor_id?}', [ClientController::class, "BookAppoument"])->name("bookappoument");
+Route::get('doctor/bookappoument/{doctor}', [ClientController::class, "BookAppoument"])->name("bookappoument");
 
 Route::prefix("/auth")->name("auth.")->group(function () {
     Route::get('/login',[AuthController::class,"login"])->name("login");

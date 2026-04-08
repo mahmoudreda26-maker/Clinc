@@ -9,15 +9,20 @@
             </ol>
         </nav>
         <div class="majors-grid">
-            @foreach ($majors as $major)
+             {{-- @php($majors=[]) --}}
+            @forelse ($majors as $major)
                 <div class="card p-2" style="width: 18rem;">
                     <img src="{{ $major->imagUrl() }}" class="card-img-top rounded-circle card-image-circle" alt="major">
                     <div class="card-body d-flex flex-column gap-1 justify-content-center">
                         <h4 class="card-title fw-bold text-center">{{ $major->name }}</h4>
-                        <a href="" class="btn btn-outline-primary card-button">Browse Doctors</a>
+                        <a href="{{ route('doctor',[ "slug" => $major->slug]) }}" class="btn btn-outline-primary card-button">Browse Doctors</a>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <h1>
+                    not major found
+                </h1>
+            @endforelse
         </div>
 
         <nav class="mt-5" aria-label="navigation">

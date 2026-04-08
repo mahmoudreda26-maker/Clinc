@@ -24,23 +24,31 @@
     <div class="container">
         <h2 class="h1 fw-bold text-center my-4">majors</h2>
 
-        <div class="d-flex flex-wrap gap-4 justify-content-center">
-            @foreach ($majors as $major)
+        <div class="majors-grid">
+             {{-- @php($majors=[]) --}}
+            @forelse ($majors as $major)
                 <div class="card p-2" style="width: 18rem;">
                     <img src="{{ $major->imagUrl() }}" class="card-img-top rounded-circle card-image-circle" alt="major">
                     <div class="card-body d-flex flex-column gap-1 justify-content-center">
                         <h4 class="card-title fw-bold text-center">{{ $major->name }}</h4>
-                        <a href="" class="btn btn-outline-primary card-button">Browse Doctors</a>
+                        <a href="{{ route('doctor',["slug"=> $major->slug]) }}" class="btn btn-outline-primary card-button">Browse Doctors</a>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <h2>
+                    not major found
+                </h2>
+            @endforelse ()
+            {{-- <div class="text-center mt-3 d-flex justify-content-center">
+    {{ $doctors->links() }}
+</div> --}}
         </div>
-
         <h2 class="h1 fw-bold text-center my-4">doctors</h2>
         <section class="splide home__slider__doctors mb-5">
             <div class="splide__track ">
                 <ul class="splide__list">
-                    @foreach ($doctors as $doctor)
+                    {{-- @php($doctors[]) --}}
+                    @forelse($doctors as $doctor)
                         <li class="splide__slide">
                             <div class="card p-2" style="width: 18rem;">
                                 <img src="{{ $doctor->imagUrl() }}" class="card-img-top rounded-circle card-image-circle"
@@ -48,12 +56,14 @@
                                 <div class="card-body d-flex flex-column gap-1 justify-content-center">
                                     <h4 class="card-title fw-bold text-center">{{ $doctor->name }}</h4>
                                     <h6 class="card-title fw-bold text-center">{{ $doctor->major->name }}</h6>
-                                    <a href="./doctors/doctor.html" class="btn btn-outline-primary card-button">Book an
+                                    <a href="{{ route('bookappoument', $doctor->id) }}" class="btn btn-outline-primary card-button">Book an
                                         appointment</a>
                                 </div>
                             </div>
                         </li>
-                    @endforeach
+                        @empty
+                        <h2>not doctor found</h2>
+                    @endforelse
                 </ul>
             </div>
         </section>
