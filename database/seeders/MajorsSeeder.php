@@ -12,9 +12,9 @@ class MajorsSeeder extends Seeder
     public function run(): void
     {
 
-DB::statement('SET FOREIGN_KEY_CHECKS=0;');  // تعطيل الفوريجن كي
-Major::truncate();
-DB::statement('SET FOREIGN_KEY_CHECKS=1;');  // إعادة التفعيل
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Major::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         $majors = [
             [
                 'name' => 'Cardiology',
@@ -52,8 +52,7 @@ DB::statement('SET FOREIGN_KEY_CHECKS=1;');  // إعادة التفعيل
                 'image' => 'https://plymouthmeetingdermatology.com/wp-content/uploads/2022/01/plym_What-is-Cosmetic-Dermatology.jpg'
             ],
 
-            ];
-              Major::insert($majors);
-            }
-
+        ];
+        Major::insert($majors);
+    }
 }

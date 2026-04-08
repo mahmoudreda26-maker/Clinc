@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
@@ -10,7 +11,7 @@ class ClientController extends Controller
 {
     function home(Request $request)
     {
-               $doctors = Doctor::with("major");
+        $doctors = Doctor::with("major");
 
         if ($request->has('slug')) {
             $major = Major::where("slug", $request->slug)->firstOrFail();

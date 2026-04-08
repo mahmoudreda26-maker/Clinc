@@ -1,6 +1,11 @@
  @extends("client.layouts.master")
  @section("page_title","login")
  @section("front-content")
+ @if(session("success"))
+   <div class="alert alert-success text-center">
+    {{session("success")}}
+</div>
+ @endif
        <div class="container">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="fw-bold my-4 h4">
                 <ol class="breadcrumb justify-content-center">
