@@ -10,14 +10,24 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <div class="d-flex gap-3 flex-wrap justify-content-center" role="group">
-                        <a type="button" class="btn btn-outline-light navigation--button" href="{{ route('home') }}">Home</a>
+                        <a type="button" class="btn btn-outline-light navigation--button"
+                            href="{{ route('home') }}">Home</a>
                         <a type="button" class="btn btn-outline-light navigation--button"
                             href="{{ route('majors') }}">majors</a>
                         <a type="button" class="btn btn-outline-light navigation--button"
                             href="{{ route('doctor') }}">Doctors</a>
-                        <a type="button" class="btn btn-outline-light navigation--button" href="{{ route('auth.login') }}">login</a>
+                        @guest
+                            <a type="button" class="btn btn-outline-light navigation--button"
+                                href="{{ route('auth.login') }}">login</a>
+
+                        @endguest
+
+                        @auth
+                            <a type="button" class="btn btn-outline-light navigation--button"
+                                href="{{ route('auth.logout') }}">logout</a>
+                        @endauth
+
                     </div>
                 </div>
             </div>
         </nav>
-

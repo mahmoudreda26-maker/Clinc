@@ -39,20 +39,20 @@
           <form class="form">
             <div class="form-items">
               <div class="mb-3">
-                <label class="form-label required-label" for="name">Name</label>
+                <label class="form-label required-label" value="{{ auth()->user()->name ?? "" }}" for="name">Name</label>
                 <input type="text" class="form-control" id="name" required />
               </div>
               <div class="mb-3">
                 <label class="form-label required-label" for="phone"
                   >Phone</label
                 >
-                <input type="tel" class="form-control" id="phone" required />
+                <input type="tel" class="form-control" value="{{ auth()->user()->phone  ?? ""}}" id="phone" required />
               </div>
               <div class="mb-3">
                 <label class="form-label required-label" for="email"
                   >Email</label
                 >
-                <input type="email" class="form-control" id="email" required />
+                <input type="email" class="form-control" value="{{ auth()->user()->eamil  ?? ""}}" id="email" required />
               </div>
             </div>
             <button type="submit" class="btn btn-primary">
