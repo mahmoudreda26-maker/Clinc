@@ -11,6 +11,8 @@ class Doctor extends Model
         'email',
         'phone',
         'address',
+        'experience',
+        'status',
         'image',
         'major_id',
     ];
@@ -18,6 +20,10 @@ class Doctor extends Model
     {
         return $this->belongsTo(Major::class);
     }
+    public function appointments()
+{
+    return $this->hasMany(Appointment::class);
+}
     public function imagUrl()
         {
             if($this->image && filter_var($this->image,FILTER_VALIDATE_URL)){

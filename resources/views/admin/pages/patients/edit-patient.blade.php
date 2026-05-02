@@ -8,7 +8,7 @@
 								<h1>Edit Patient</h1>
 							</div>
 							<div class="col-sm-6 text-right">
-								<a href="{{ route('admin.patients') }}" class="btn btn-primary">Back</a>
+								<a href="{{ route('patients.create') }}" class="btn btn-primary">Back</a>
 							</div>
 						</div>
 					</div>
@@ -107,7 +107,7 @@
 						</div>
 						<div class="pb-5 pt-3">
 							<button class="btn btn-primary">Update</button>
-							<a href="{{ route('admin.patients') }}" class="btn btn-outline-dark ml-3">Cancel</a>
+							<a href="{{ route('patients.create') }}" class="btn btn-outline-dark ml-3">Cancel</a>
 						</div>
 					</div>
 				</section>

@@ -12,6 +12,8 @@ class Major extends Model
     protected $fillable = [
         'name',
         'slug',
+        'desc',
+        'doctors_count',
         'image',
     ];
 

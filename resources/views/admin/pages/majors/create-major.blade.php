@@ -8,7 +8,7 @@
 								<h1>Create Major/Specialization</h1>
 							</div>
 							<div class="col-sm-6 text-right">
-								<a href="{{ route('admin.majors') }}" class="btn btn-primary">Back</a>
+								<a href="{{ route('Majors.index') }}" class="btn btn-primary">Back</a>
 							</div>
 						</div>
 					</div>
@@ -51,7 +51,7 @@
 						</div>
 						<div class="pb-5 pt-3">
 							<button class="btn btn-primary">Create</button>
-							<a href="{{ route('admin.majors') }}" class="btn btn-outline-dark ml-3">Cancel</a>
+							<a href="{{ route('Majors.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
 						</div>
 					</div>
 				</section>

@@ -29,21 +29,23 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link p-0 pr-3" data-toggle="dropdown" href="#">
-                        <img src="img/avatar5.png" class='img-circle elevation-2' width="40" height="40"
-                            alt="">
+                        <img src="{{ asset('admin/asstes/img/avatar5.png') }}" class='img-circle elevation-2'
+                            width="40" height="40" alt="">
                     </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-3">
-                        <h4 class="h4 mb-0"><strong>Dr. John Doe</strong></h4>
-                        <div class="mb-3">doctor@example.com</div>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-user-md mr-2"></i> Profile
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="{{ route('auth.logout') }}" class="dropdown-item text-danger">
-                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
-                        </a>
-                    </div>
+                    @if (!empty($admin))
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-3">
+                            <h4 class="h4 mb-0"><strong>{{ $admin->name }}</strong></h4>
+                            <div class="mb-3">{{ $admin->email }}</div>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user-md mr-2"></i> Profile
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{ route('auth.logout') }}" class="dropdown-item text-danger">
+                                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                            </a>
+                        </div>
+                        @endif
                 </li>
             </ul>
         </nav>
@@ -59,31 +61,31 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item">
-                            <a href="{{ route('admin.home') }}" class="nav-link">
+                            <a href="{{ route('dashbord') }}" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.appointments') }}" class="nav-link">
+                            <a href="{{ route('appointments.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-calendar-check"></i>
                                 <p>Appointments</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.patients') }}" class="nav-link">
+                            <a href="{{ route('patients.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-user-injured"></i>
                                 <p>Patients</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.doctors') }}" class="nav-link">
+                            <a href="{{ route('doctors.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-user-md"></i>
                                 <p>Doctors</p>
                             </a>
                         </li>
-                         <li class="nav-item">
-                            <a href="{{ route('admin.majors') }}" class="nav-link">
+                        <li class="nav-item">
+                            <a href="{{ route('Majors.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-user-md"></i>
                                 <p>Majors</p>
                             </a>
@@ -99,7 +101,7 @@
     </div>
     <script src="{{ asset('admin/asstes/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('admin/asstes/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('admin/assetes/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/adminlte.min.js') }}"></script>
 </body>
 
 </html>

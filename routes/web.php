@@ -1,13 +1,24 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\appointmentAdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DoctorAdminController;
+use App\Http\Controllers\MajorAdminController;
+use App\Http\Controllers\PatientAdminController;
+use App\Models\Major;
 use Illuminate\Support\Facades\Route;
+
+
+// Route Client
 
 Route::get('/', [ClientController::class, "home"])->name("home");
 Route::get('/doctor', [ClientController::class, "doctor"])->name("doctor");
 Route::get('/majors', [ClientController::class, "majors"])->name("majors");
 Route::get('doctor/bookappoument/{doctor}', [ClientController::class, "BookAppoument"])->name("bookappoument");
+
+// Route group Auth
 
 Route::prefix("/auth")->name("auth.")->group(function () {
     Route::get('/login', [AuthController::class, "login"])->name("login");
@@ -18,22 +29,10 @@ Route::prefix("/auth")->name("auth.")->group(function () {
     Route::get('/logout', [AuthController::class, "logout"])->name("logout");
 });
 
-Route::prefix("/admin")->name("admin.")->group(function () {
-    Route::view('/home', 'admin.pages.dashbord')->name("home");
+// Route group  Dashbord
 
-    Route::view('/appointments', 'admin.pages.appointments.appointment')->name('appointments');
-    Route::view('/appointment/create', 'admin.pages.appointments.create-appointment')->name('appointments.create');
-    Route::view('/appointment/edit', 'admin.pages.appointments.edit-appointment')->name('appointments.edit');
-
-    Route::view('/doctors', 'admin.pages.doctors.doctor')->name('doctors');
-    Route::view('/doctors/create', 'admin.pages.doctors.create-doctor')->name('doctors.create');
-    Route::view('/doctors/edit', 'admin.pages.doctors.edit-doctor')->name('doctors.edit');
-
-    Route::view('/Majors','admin.pages.majors.major')->name('majors');
-    Route::view('/Majors/create', 'admin.pages.majors.create-major')->name('majors.create');
-    Route::view('/Majors/edit', 'admin.pages.majors.edit-major')->name('majors.edit');
-
-    Route::view('/patients', 'admin.pages.patients.patient')->name('patients');
-    Route::view('/patients/create', 'admin.pages.patients.create-patient')->name('patients.create');
-    Route::view('/patients/edit', 'admin.pages.patients.edit-patient')->name('patients.edit');
-});
+Route::get('/dashbord', [AdminController::class, 'home'])->name("dashbord");
+Route::resource('doctors', DoctorAdminController::class);
+Route::resource('appointments', appointmentAdminController::class);
+Route::resource('Majors' , MajorAdminController::class);
+Route::resource('patients', PatientAdminController::class);
