@@ -2,66 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\doctorCreatedEvent;
-use Illuminate\Http\Request;
+use App\Http\Requests\CreateDoctorRequest;
 use App\Models\Doctor;
+use App\Models\Major;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
+
 class DoctorAdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-         $doctors = Doctor::all();
-        return view('admin.pages.doctors.doctor',compact('doctors'));
+        $doctors = Doctor::with("major")->paginate(10);
+        return view('admin.pages.doctors.doctor', compact('doctors'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-
-        return view('admin.pages.doctors.create-doctor');
+        $majors = Major::all();
+        return view('admin.pages.doctors.create-doctor', compact('majors'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(CreateDoctorRequest $request)
     {
-        //
+        $data = $request->validated();
+
+if ($request->hasFile('image')) {
+    $data['image'] = $request->file('image')->store('doctors', 'public');
+}
+        dd($data);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit($id)
     {
         return view('admin.pages.doctors.edit-doctor');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    public function update(Request $request, $id) {}
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    public function destroy($id) {}
 }
