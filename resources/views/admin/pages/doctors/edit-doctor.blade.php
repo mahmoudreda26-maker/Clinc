@@ -1,115 +1,110 @@
 @extends('admin.layouts.master')
+
 @section('content')
-			<div class="content-wrapper">
-				<section class="content-header">
-					<div class="container-fluid my-2">
-						<div class="row mb-2">
-							<div class="col-sm-6">
-								<h1>Edit Doctor</h1>
-							</div>
-							<div class="col-sm-6 text-right">
-								<a href="{{ route('doctors.index') }}" class="btn btn-primary">Back</a>
-							</div>
-						</div>
-					</div>
-				</section>
-				<section class="content">
-					<div class="container-fluid">
-						<div class="card">
-							<div class="card-body">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label for="name">Full Name</label>
-											<input type="text" name="name" id="name" class="form-control" placeholder="Dr. John Doe" value="Dr. Sarah Johnson">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label for="email">Email</label>
-											<input type="email" name="email" id="email" class="form-control" placeholder="doctor@clinic.com" value="sarah.johnson@clinic.com">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label for="phone">Phone</label>
-											<input type="text" name="phone" id="phone" class="form-control" placeholder="+1 234-567-8900" value="+1 234-567-8901">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label for="major">Major/Specialization</label>
-											<select name="major" id="major" class="form-control">
-												<option value="">Select Major</option>
-												<option value="1" selected>Cardiology</option>
-												<option value="2">Neurology</option>
-												<option value="3">Pediatrics</option>
-												<option value="4">Orthopedics</option>
-												<option value="5">Dermatology</option>
-												<option value="6">General Medicine</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label for="license_number">License Number</label>
-											<input type="text" name="license_number" id="license_number" class="form-control" placeholder="MED-12345" value="MED-78901">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label for="experience">Years of Experience</label>
-											<input type="number" name="experience" id="experience" class="form-control" placeholder="5" value="12">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label for="qualification">Qualification</label>
-											<input type="text" name="qualification" id="qualification" class="form-control" placeholder="MBBS, MD" value="MBBS, MD (Cardiology)">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label for="consultation_fee">Consultation Fee ($)</label>
-											<input type="number" name="consultation_fee" id="consultation_fee" class="form-control" placeholder="100" value="150">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="mb-3">
-											<label for="address">Address</label>
-											<textarea name="address" id="address" class="form-control" cols="30" rows="3" placeholder="Enter full address">123 Medical Center Drive, Suite 200, New York, NY 10001</textarea>
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="mb-3">
-											<label for="bio">Bio/About</label>
-											<textarea name="bio" id="bio" class="form-control" cols="30" rows="4" placeholder="Brief description about the doctor">Dr. Sarah Johnson is a board-certified cardiologist with over 12 years of experience in treating heart conditions. She specializes in preventive cardiology and interventional procedures.</textarea>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label for="profile_image">Profile Image</label>
-											<input type="file" name="profile_image" id="profile_image" class="form-control">
-											<small class="text-muted">Current: doctor_profile.jpg</small>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="mb-3">
-											<label for="status">Status</label>
-											<select name="status" id="status" class="form-control">
-												<option value="1" selected>Active</option>
-												<option value="0">Inactive</option>
-											</select>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="pb-5 pt-3">
-							<button class="btn btn-primary">Update</button>
-							<a href="{{ route('doctors.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
-						</div>
-					</div>
-				</section>
-			</div>
+    <form method="POST" action="{{ route('doctors.update',$doctor->id) }}" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
+        <div class="content-wrapper">
+            <section class="content-header">
+                <div class="container-fluid my-2">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Edit Doctor</h1>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <a href="{{ route('doctors.index') }}" class="btn btn-primary">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="row">
+
+                                <!-- Name -->
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label>Full Name</label>
+                                        <input type="text" name="name" class="form-control"
+                                            placeholder="Dr. John Doe" value="{{ old('name' , $doctor->name) }}">
+                                    </div>
+                                    <x-validation-alert key="name" />
+                                </div>
+
+                                <!-- Email -->
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label>Email</label>
+                                        <input type="email" name="email" class="form-control"
+                                            placeholder="doctor@clinic.com" value="{{ old('email' , $doctor->email)}}">
+                                    </div>
+                                    <x-validation-alert key="email" />
+                                </div>
+
+                                <!-- Phone -->
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label>Phone</label>
+                                        <input type="text" name="phone" class="form-control"
+                                            placeholder="+1 234-567-8900" value="{{ old('phone' , $doctor->phone)}}" >
+                                    </div>
+                                    <x-validation-alert key="phone" />
+                                </div>
+
+                                <!-- Major -->
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label>Major</label>
+                                        <select name="major_id" class="form-control" ">
+                                            <option value="">Select Major</option>
+                                            @foreach ($majors as $major)
+                                                <option value="{{ $major->id }}" {{ old('major_id', $doctor->major_id) == $major->id ? 'selected': '' }}>{{ $major->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <x-validation-alert key="major_id" />
+                                </div>
+
+                                <!-- Address -->
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label>Address</label>
+                                        <textarea name="address" class="form-control" rows="3"></textarea>
+                                    </div>
+                                    <x-validation-alert key="address" />
+                                </div>
+
+                                <!-- Image -->
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label>Profile Image</label>
+                                        <input type="file" name="image" class="form-control">
+                                    </div>
+                                    @if($doctor->image)
+                                    <div>
+                                        <a href="{{ asset('storage/'.$doctor->image) }}"></a>
+                                    </div>
+                                    @endif
+                                    <x-validation-alert key="image" />
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="pb-5 pt-3">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                        <a href="{{ route('doctors.index') }}" class="btn btn-outline-dark ml-3">Cancel</a>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+
+    </form>
 @endsection

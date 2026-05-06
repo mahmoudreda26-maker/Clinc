@@ -19,20 +19,22 @@ Route::get('/majors', [ClientController::class, "majors"])->name("majors");
 Route::get('doctor/bookappoument/{doctor}', [ClientController::class, "BookAppoument"])->name("bookappoument");
 
 // Route group Auth
+// Route::redirect("/login" , "/auth/login")->name("login");
 
 Route::prefix("/auth")->name("auth.")->group(function () {
     Route::get('/login', [AuthController::class, "login"])->name("login");
     Route::post('/login', [AuthController::class, "submitLogin"])->name("submit.login");
+
     Route::get('/register', [AuthController::class, "register"])->name("register");
     Route::post('/register', [AuthController::class, "submitRegister"])->name("submit.register");
+
     Route::get('/contact', [AuthController::class, "contact"])->name("contact");
     Route::get('/logout', [AuthController::class, "logout"])->name("logout");
 });
 
 // Route group  Dashbord
-
 Route::get('/dashbord', [AdminController::class, 'home'])->name("dashbord");
 Route::resource('doctors', DoctorAdminController::class);
 Route::resource('appointments', appointmentAdminController::class);
-Route::resource('Majors' , MajorAdminController::class);
+Route::resource('Majors', MajorAdminController::class);
 Route::resource('patients', PatientAdminController::class);

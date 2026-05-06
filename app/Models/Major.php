@@ -23,7 +23,7 @@ class Major extends Model
     {
         return $this->hasMany(Doctor::class);
     }
-    public function imageUrl()
+    public function imagUrl()
     {
         if ($this->image && filter_var($this->image, FILTER_VALIDATE_URL)) {
             return $this->image;

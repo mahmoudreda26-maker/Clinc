@@ -25,7 +25,7 @@ class CreateDoctorRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:doctors,email',
-            'phone' => ['required ', 'regex:/^[0-9+\-\s]+$/'],
+            'phone' => ['required', 'regex:/^[0-9+\-\s]+$/'],
             'address' => 'nullable|string|max:500',
             'major_id' => 'required|exists:majors,id',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp,svg|max:2048',

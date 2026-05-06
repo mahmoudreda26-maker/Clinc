@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateDoctorRequest;
+use App\Http\Requests\UpdateDoctorRequest;
 use App\Models\Doctor;
 use App\Models\Major;
 use Illuminate\Http\Request;
@@ -27,18 +28,46 @@ class DoctorAdminController extends Controller
     {
         $data = $request->validated();
 
-if ($request->hasFile('image')) {
-    $data['image'] = $request->file('image')->store('doctors', 'public');
-}
-        dd($data);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $file_name = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('doctors', $file_name, 'public');
+            $data['image'] = 'doctors/' . $file_name;
+        }
+        Doctor::create($data);
+        return redirect()->route('doctors.index')->with("success", " Doctor Created Successfuly");
     }
-
-    public function edit($id)
+    public function edit(Doctor $doctor)
     {
-        return view('admin.pages.doctors.edit-doctor');
+        $majors = Major::all();
+        return view('admin.pages.doctors.edit-doctor', compact("doctor", "majors"));
     }
 
-    public function update(Request $request, $id) {}
 
-    public function destroy($id) {}
+    public function update(UpdateDoctorRequest $request, Doctor $doctor)
+    {
+        $data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            if ($doctor->image) {
+                Storage::disk('public')->delete($doctor->image);
+            }
+            $file = $request->file('image');
+            $file_name = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('doctors', $file_name, 'public');
+            $data['image'] = 'doctors/' . $file_name;
+        }
+        $doctor->update($data);
+        return redirect()->route('doctors.index')
+            ->with("success", "Doctor Updated Successfully");
+    }
+    public function destroy(Doctor $doctor)
+    {
+        if ($doctor->image) {
+            Storage::disk('public')->delete($doctor->image);
+        }
+        $doctor->delete($doctor);
+        return redirect()->route('doctors.index')
+            ->with("success", "Doctor Delet Successfully");
+    }
 }

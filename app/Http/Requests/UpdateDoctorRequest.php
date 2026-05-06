@@ -12,7 +12,7 @@ class UpdateDoctorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return True;
     }
 
     /**
@@ -23,7 +23,12 @@ class UpdateDoctorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|email',
+            'phone' => [' nullable', 'regex:/^[0-9+\-\s]+$/'],
+            'address' => 'nullable|string|max:500',
+            'major_id' => 'nullable|exists:majors,id',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp,svg|max:2048',
         ];
     }
 }

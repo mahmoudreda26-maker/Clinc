@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 
 class appointmentAdminController extends Controller
@@ -13,6 +14,7 @@ class appointmentAdminController extends Controller
     public function index()
     {
        $appointments=Appointment::all();
+       $doctors =Doctor::all();
         return view('admin.pages.appointments.appointment',compact('appointments'));
     }
 

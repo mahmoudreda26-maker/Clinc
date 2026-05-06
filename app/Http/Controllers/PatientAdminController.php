@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePatientRequest;
+use App\Http\Requests\UpdatePatientRequest;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 
@@ -12,7 +14,7 @@ class PatientAdminController extends Controller
      */
     public function index()
     {
-        $patients=Patient::all();
+        $patients = Patient::paginate(10);
         return view('admin.pages.patients.patient', compact('patients'));
     }
 
@@ -21,15 +23,19 @@ class PatientAdminController extends Controller
      */
     public function create()
     {
+
         return view('admin.pages.patients.create-patient');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreatePatientRequest $request)
     {
-        //
+        $data=$request->validated();
+        Patient::create($data);
+                return redirect()->route('patients.index')
+            ->with("success", "created patient Successfully");
     }
 
     /**
@@ -45,22 +51,28 @@ class PatientAdminController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.pages.patients.edit-patient');
+         $patient = Patient::findOrFail($id);
+        return view('admin.pages.patients.edit-patient' , compact('patient'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdatePatientRequest $request, Patient $patient)
     {
-        //
+        $data=$request->validated();
+      $patient->update($data);
+        return redirect()->route('patients.index')
+            ->with("success", "patient Updated Successfully");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Patient $patient)
     {
-        //
+        $patient->delete($patient);
+        return redirect()->route('patients.index')
+            ->with("success", "patient Delet Successfully");
     }
 }

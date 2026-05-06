@@ -1,5 +1,8 @@
 @extends('admin.layouts.master')
 @section('content')
+    <form method="POST" action="{{ route('patients.update',$patient->id) }}" enctype="multipart/form-data">
+        @csrf
+        @method('PUT')
 			<div class="content-wrapper">
 				<section class="content-header">
 					<div class="container-fluid my-2">
@@ -21,31 +24,31 @@
 									<div class="col-md-6">
 										<div class="mb-3">
 											<label for="name">Full Name</label>
-											<input type="text" name="name" id="name" class="form-control" placeholder="John Doe" value="John Smith">
+											<input type="text" name="name" id="name" class="form-control" placeholder="John Doe" value="{{ old('name' , $patient->name) }}">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="mb-3">
 											<label for="email">Email</label>
-											<input type="email" name="email" id="email" class="form-control" placeholder="patient@email.com" value="john.smith@email.com">
+											<input type="email" name="email" id="email" class="form-control" placeholder="patient@email.com" value="{{ old('email' , $patient->email)}}">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="mb-3">
 											<label for="phone">Phone</label>
-											<input type="text" name="phone" id="phone" class="form-control" placeholder="+1 234-567-8900" value="+1 234-567-1001">
+											<input type="text" name="phone" id="phone" class="form-control" placeholder="+1 234-567-8900" value="{{ old('phone' , $patient->phone)}}">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="mb-3">
 											<label for="date_of_birth">Date of Birth</label>
-											<input type="date" name="date_of_birth" id="date_of_birth" class="form-control" value="1979-05-15">
+											<input type="date" name="date_of_birth" id="date_of_birth" class="form-control" value="{{ old('date_of_brith' , $patient->date_of_brith)}}">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="mb-3">
 											<label for="age">Age</label>
-											<input type="number" name="age" id="age" class="form-control" placeholder="25" value="45">
+											<input type="number" name="age" id="age" class="form-control" placeholder="25" value="{{ old('old' , $patient->age ) }}">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -112,4 +115,5 @@
 					</div>
 				</section>
 			</div>
+            </form>
 @endsection
