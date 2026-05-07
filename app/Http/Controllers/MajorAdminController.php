@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateMajorRequest;
+use App\Http\Requests\UpdateMajorRequest;
 use App\Models\Major;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class MajorAdminController extends Controller
 {
@@ -12,7 +16,7 @@ class MajorAdminController extends Controller
      */
     public function index()
     {
-        $majors=Major::all();
+        $majors = Major::paginate(5);
         return view('admin.pages.majors.major', compact('majors'));
     }
 
@@ -28,10 +32,18 @@ class MajorAdminController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+
+    public function store(CreateMajorRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $data['slug'] = Str::slug($data['name']);
+
+        Major::create($data);
+
+        return redirect()->route('majors.index')->with('success', 'Created');
     }
+
 
     /**
      * Display the specified resource.
@@ -44,24 +56,28 @@ class MajorAdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Major $major)
     {
-        return view('admin.pages.majors.edit-major');
+
+        return view('admin.pages.majors.edit-major', compact('major'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateMajorRequest $request, Major $major)
     {
-        //
+        $data = $request->validated();
+        $major->update($data);
+        return redirect()->route('majors.index')->with("success", " Major Update Successfuly");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Major $major)
     {
-        //
+        $major->delete($major);
+        return redirect()->route('majors.index')->with("success", " Major Update Successfuly");
     }
 }

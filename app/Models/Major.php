@@ -10,13 +10,13 @@ class Major extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'slug',
-        'desc',
-        'doctors_count',
-        'image',
-    ];
+protected $fillable = [
+    'name',
+    'desc',
+    'slug',
+    'icon',
+    'status',
+];
 
 
     public function doctors()

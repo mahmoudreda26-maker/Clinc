@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ClientController::class, "home"])->name("home");
 Route::get('/doctor', [ClientController::class, "doctor"])->name("doctor");
-Route::get('/majors', [ClientController::class, "majors"])->name("majors");
+Route::get('/major', [ClientController::class, "majors"])->name("client.majors");
 Route::get('doctor/bookappoument/{doctor}', [ClientController::class, "BookAppoument"])->name("bookappoument");
 
 // Route group Auth
@@ -36,5 +36,5 @@ Route::prefix("/auth")->name("auth.")->group(function () {
 Route::get('/dashbord', [AdminController::class, 'home'])->name("dashbord");
 Route::resource('doctors', DoctorAdminController::class);
 Route::resource('appointments', appointmentAdminController::class);
-Route::resource('Majors', MajorAdminController::class);
+Route::resource('majors', MajorAdminController::class);
 Route::resource('patients', PatientAdminController::class);

@@ -17,8 +17,11 @@ public function up(): void
     });
 }
 
+
 public function down(): void
 {
-
+    Schema::table('majors', function (Blueprint $table) {
+        $table->dropColumn(['doctors_count', 'desc']);
+    });
 }
 };

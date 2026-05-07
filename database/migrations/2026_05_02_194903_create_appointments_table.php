@@ -22,14 +22,8 @@ public function up(): void
         $table->string('reason')->nullable();
         $table->text('additional_notes')->nullable();
 
-        $table->foreignId('patient_id')
-            ->constrained('patients')
-            ->onDelete('cascade');
-
-        $table->foreignId('doctor_id')
-            ->constrained('doctors')
-            ->onDelete('cascade');
-
+        $table->foreignId('patient_id')->constrained('patients')->onDelete('cascade');
+        $table->foreignId('doctor_id')->constrained('doctors')->onDelete('cascade');
         $table->timestamps();
     });
 }

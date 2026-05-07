@@ -13,7 +13,7 @@
                         <a type="button" class="btn btn-outline-light navigation--button"
                             href="{{ route('home') }}">Home</a>
                         <a type="button" class="btn btn-outline-light navigation--button"
-                            href="{{ route('majors') }}">majors</a>
+                            href="{{ route('client.majors') }}">majors</a>
                         <a type="button" class="btn btn-outline-light navigation--button"
                             href="{{ route('doctor') }}">Doctors</a>
                         @guest

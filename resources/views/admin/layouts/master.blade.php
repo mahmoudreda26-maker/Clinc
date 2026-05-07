@@ -52,7 +52,7 @@
         <!-- Sidebar -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="#" class="brand-link">
-                <img src="img/AdminLTELogo.png" alt="Clinic Logo" class="brand-image img-circle elevation-3"
+                <img src="{{asset('img/AdminLTELogo.png') }}" alt="Clinic Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">Clinic Dashboard</span>
             </a>
@@ -85,7 +85,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('Majors.index') }}" class="nav-link">
+                            <a href="{{ route('majors.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-user-md"></i>
                                 <p>Majors</p>
                             </a>
@@ -99,9 +99,9 @@
             <strong>Copyright &copy; 2024 Clinic Management All rights reserved.</strong>
         </footer>
     </div>
-    <script src="{{ asset('admin/asstes/plugins/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('admin/asstes/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/adminlte.min.js') }}"></script>
+    <script src="{{asset('admin/asstes/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{asset('admin/asstes/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{asset('admin/assets/js/adminlte.min.js') }}"></script>
 </body>
 
 </html>
